@@ -1,0 +1,12 @@
+@import "materialize-css/sass/materialize";
+@import "../variables/mycolors";
+
+body {
+  background-color: $login-background;
+  #login-page {
+    margin-top: 40px;
+    border-radius: 5px;
+    background-color: $white;
+    width: 500px;
+  }
+}
