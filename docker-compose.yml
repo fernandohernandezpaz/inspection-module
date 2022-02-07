@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  tsnode-api:
+    container_name: tsnode-api
+    build:
+      context: .
+      dockerfile: ./docker/backend/Dockerfile
+      target: base
+    volumes:
+      - ./backend/src/:/home/node/app/src
+      - ./backend/nodemon.json:/home/node/app/nodemon.json
+    expose:
+      - '4000'
+    ports:
+      - '4000:4000'
+    command: npm run dev
+
+  inspect-nginx:
+    container_name: inspect-nginx
+    depends_on:
+      - tsnode-api
+    restart: always
+    build:
+      dockerfile: ./docker/nginx/Dockerfile
+      context: .
+    ports:
+      - "3050:80"
